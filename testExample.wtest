@@ -1,5 +1,6 @@
 import mensajeros.*;
-import destinos.*;
+import mensajeria.*;
+
 
 describe "parte 1" {
 
@@ -8,7 +9,7 @@ describe "parte 1" {
     roberto.viajaEn(camion)
     roberto.acoplados(1)
 
-    assert.that(puenteBrooklyn.pesoMax() > roberto.transporte(1))
+    assert.that(1000 > roberto.transporte(1))
   }
 
   test "neo con crédito no puede llevar un paquete que no está pago a la matrix." {
@@ -16,5 +17,43 @@ describe "parte 1" {
     neo.estaPago(false)
 
     assert.notThat(neo.puedeLlamar() && neo.estaPago())
+  }
+}
+describe "parte 2"{
+  test "Contratar a un mensajero"{
+    mensajeria.contratar(roberto)
+
+    assert.that(mensajeria.noEstaVacia())
+  }
+  test "Despedir a un mensajero"{
+    mensajeria.contratar(roberto)
+    mensajeria.despedir(roberto)
+    assert.that(mensajeria.estaVacia())
+  }
+  test"Despedir a todos los mensajeros"{
+    mensajeria.contratar(roberto)
+    mensajeria.contratar(chuckNorris)
+    mensajeria.contratar(neo)
+
+    mensajeria.despedirATodos()
+    assert.that(mensajeria.estaVacia())
+  }
+  test "mensajeria es grande"{
+    mensajeria.contratar(roberto)
+    mensajeria.contratar(chuckNorris)
+    mensajeria.contratar(neo)
+
+    assert.that(mensajeria.esGrande())
+  }
+  test "el paquete puede ser entregado por el primer empleado de la empresa"{
+    mensajeria.contratar(chuckNorris)
+    assert.that(mensajeria.elPrimeroPuedeEntregarPaquete())
+  }
+  test "el peso del último mensajero de la empresa. "{
+    mensajeria.contratar(roberto)
+    mensajeria.contratar(chuckNorris)
+    mensajeria.contratar(neo)
+
+    assert.equals(0, mensajeria.elPesoDelUltimoMensajero())
   }
 }
