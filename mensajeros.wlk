@@ -1,47 +1,38 @@
 // roberto
 object roberto {
-    var property viajaEn = bicicleta
-    var property estaPago = true
-    var pesoTotal = 0;
+    var viajaEn = bicicleta
 
     method puedeLlamar() = false;
 
-    method peso() = 90;
+    method peso() = 90 + viajaEn.peso();
 
-    method transporte(cantidadDeAcoplados) {
-        pesoTotal = (viajaEn.peso() + self.peso()) + self.acoplados(cantidadDeAcoplados)
-        return pesoTotal;
-    }
-    method acoplados(cantidadDeAcoplados) {
-        return camion.pesoPorAcoplado() * cantidadDeAcoplados;
-    }
-
-    method pesaMenosDeUnaTonelada() {
-        return pesoTotal < 1000;
+    method cambiarVehiculo(nuevoVehiculo){
+        viajaEn = nuevoVehiculo
+        return viajaEn
     }
 }
 
 object bicicleta {
-    method peso() = 5
+    method peso() = 5;
 }
 object camion {
-    method peso() = 100
-    method pesoPorAcoplado() = 500 
+    var cantidadDeAcoplados = 0;
+    method acoplados(cantidadAcoplados) {
+      cantidadDeAcoplados = cantidadAcoplados;
+      return cantidadDeAcoplados;
+    }
+    method peso() = 500 * cantidadDeAcoplados;
 } 
 
 // chuck norris
 object chuckNorris {
-    var property estaPago = true
     method peso() = 80;
     method puedeLlamar() = true;
-    method pesaMenosDeUnaTonelada() = true;
 }
 
 // neo  
 object neo {
-    var property estaPago = true
     var property tieneSaldo = true;
     method puedeLlamar() = tieneSaldo;
     method peso() = 0;
-    method pesaMenosDeUnaTonelada() = true;
 }
